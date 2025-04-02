@@ -16,3 +16,11 @@ def test_get_list_of_all_objects():
         assert response.headers["Content-Type"] == "application/json"
     with allure.step("Checking response body is not empty"):
         assert response.json()
+    with allure.step("Checking total amount objects in response"):
+        assert len(response.json()) == 13
+    with allure.step("Checking params data in first object in response"):
+        first_object = response.json()[0]
+        assert first_object["id"] == "1"
+        assert first_object["name"] == "Google Pixel 6 Pro"
+        assert first_object["data"]["color"] == "Cloudy White"
+        assert first_object["data"]["capacity"] == "128 GB"
