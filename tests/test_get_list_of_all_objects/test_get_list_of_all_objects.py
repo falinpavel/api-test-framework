@@ -2,6 +2,8 @@ import requests
 import pytest
 import allure
 
+from endpoints.get_list_of_all_objects.get_list_of_all_objects import GetListOfAllObjects
+
 
 @pytest.mark.api
 @allure.epic("REST API")
@@ -25,7 +27,8 @@ import allure
 """)
 def test_get_list_of_all_objects():
     with allure.step("Sending GET/objects request"):
-        response = requests.get("https://api.restful-api.dev/objects")
+        request = GetListOfAllObjects()
+        response = request.url_for_get_list_of_all_objects()
     with allure.step("Checking status code"):
         assert response.status_code == 200
     with allure.step("Checking content type"):
