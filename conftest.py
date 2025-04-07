@@ -22,6 +22,12 @@ def generate_new_object():
         response_generator = requests.post(
             "https://api.restful-api.dev/objects", headers=headers, json=body
         ).json()
+    with allure.step(f"Checking that REST-full API for learning not reached limit today"):
+        try:
+            if response_generator["error"]:
+                raise Exception("REST-full API for learning not reached limit today, status code 405")
+        except Exception as e:
+            raise e
     with allure.step(f"Checking that param 'createdAt' is not null"):
         assert response_generator["createdAt"] is not None, "Object is not created"
     yield response_generator
