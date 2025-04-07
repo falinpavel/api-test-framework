@@ -10,36 +10,15 @@ from endpoints.get_list_of_all_objects.get_list_of_all_objects import GetListOfA
 @allure.feature("REST API. Method GET/objects")
 @allure.story("Getting a list of all objects")
 @allure.title("Получение списка уже созданных обьектов")
-@allure.description("""
-1. Запрос полного списка обьектов
-2. Проверка, что ответ не пустой
-3. Проверка общего колличества обьектов в массиве из ответа
-4. Проверка консистентности данных в ответе, а именно для первого обьекта со следующими параметрами:
-{
-	"id": "1",
-	"name": "Google Pixel 6 Pro",
-	"data": {
-		"color": "Cloudy White",
-		"capacity": "128 GB"
-	}
-}
-5. 
-""")
+@allure.description(
+    """Тест кейс проверяет, что GET/objects
+    возвращает статус код 200 ОК, общее колличество обьектов
+    в ответе равно 13, первый обьект в списке соответствует требованиям
+    """)
 def test_get_list_of_all_objects():
-    with allure.step("Sending GET/objects request"):
-        request = GetListOfAllObjects()
-        response = request.url_for_get_list_of_all_objects()
-    with allure.step("Checking status code"):
-        assert response.status_code == 200
-    with allure.step("Checking content type"):
-        assert response.headers["Content-Type"] == "application/json"
-    with allure.step("Checking response body is not empty"):
-        assert response.json()
-    with allure.step("Checking total amount objects in response"):
-        assert len(response.json()) == 13
-    with allure.step("Checking params data in first object in response"):
-        first_object = response.json()[0]
-        assert first_object["id"] == "1"
-        assert first_object["name"] == "Google Pixel 6 Pro"
-        assert first_object["data"]["color"] == "Cloudy White"
-        assert first_object["data"]["capacity"] == "128 GB"
+    request = GetListOfAllObjects()
+    request.url_for_get_list_of_all_objects()
+    request.check_response_status_code()
+    request.check_headers()
+    request.check_response_total_objects()
+    request.check_response_first_object()
