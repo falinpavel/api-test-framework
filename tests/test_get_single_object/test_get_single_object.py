@@ -1,6 +1,5 @@
 import pytest
 import allure
-
 from endpoints.get_single_object.get_single_object import GetSingleObject
 
 

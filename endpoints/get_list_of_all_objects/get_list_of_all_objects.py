@@ -1,6 +1,5 @@
 import allure
 import requests
-
 from endpoints.base_endpoint_handler import BaseEndpointHandler
 
 

@@ -1,6 +1,5 @@
 import pytest
 import allure
-
 from endpoints.get_list_of_all_objects.get_list_of_all_objects import GetListOfAllObjects
 
 
