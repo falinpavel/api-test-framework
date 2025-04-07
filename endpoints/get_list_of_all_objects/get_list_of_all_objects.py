@@ -1,13 +1,14 @@
 import allure
 import requests
 
+from endpoints.base_endpoint_handler import BaseEndpointHandler
 
-class GetListOfAllObjects:
+
+class GetListOfAllObjects(BaseEndpointHandler):
     def __init__(self):
-        self.headers = None
+        super().__init__()
         self.first_object = None
         self.total_objects = None
-        self.status_code = None
 
     def check_get_list_of_all_objects(self):
         with allure.step("Sending GET/objects request"):
@@ -17,14 +18,6 @@ class GetListOfAllObjects:
         self.first_object = request.json()[0]
         self.headers = request.headers
         return request
-
-    def check_headers(self):
-        with allure.step("Checking content type"):
-            assert self.headers["Content-Type"] == "application/json"
-
-    def check_response_status_code(self):
-        with allure.step("Checking status code"):
-            assert self.status_code == 200
 
     def check_response_total_objects(self):
         with allure.step("Checking total amount objects in response"):

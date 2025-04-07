@@ -17,7 +17,11 @@ from endpoints.get_list_of_all_objects.get_list_of_all_objects import GetListOfA
 def test_get_list_of_all_objects():
     request = GetListOfAllObjects()
     request.check_get_list_of_all_objects()
-    request.check_response_status_code()
-    request.check_headers()
+    request.check_response_status_code(
+        request=request,
+        expected_status_code=200)
+    request.check_headers(
+        request=request,
+        expected_headers=request.headers)
     request.check_response_total_objects()
     request.check_response_first_object()

@@ -1,13 +1,14 @@
 import allure
 import requests
 
+from endpoints.base_endpoint_handler import BaseEndpointHandler
 
-class GetSingleObject:
+
+class GetSingleObject(BaseEndpointHandler):
     def __init__(self):
-        self.headers = None
+        super().__init__()
         self.object = None
         self.total_objects = None
-        self.status_code = None
 
     def check_get_single_object(self, object_id):
         with allure.step("Sending GET/objects/{object_id} request"):
@@ -17,14 +18,6 @@ class GetSingleObject:
         self.object = request.json()
         self.headers = request.headers
         return request
-
-    def check_headers(self):
-        with allure.step("Checking content type"):
-            assert self.headers["Content-Type"] == "application/json"
-
-    def check_response_status_code(self):
-        with allure.step("Checking status code"):
-            assert self.status_code == 200
 
     def check_response_object_contains_all_params(self):
         with allure.step("Checking response body contains all params"):
