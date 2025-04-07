@@ -9,7 +9,7 @@ class GetListOfAllObjects:
         self.total_objects = None
         self.status_code = None
 
-    def url_for_get_list_of_all_objects(self):
+    def check_get_list_of_all_objects(self):
         with allure.step("Sending GET/objects request"):
             request = requests.get("https://api.restful-api.dev/objects")
         self.status_code = request.status_code

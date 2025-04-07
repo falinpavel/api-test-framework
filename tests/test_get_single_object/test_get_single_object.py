@@ -16,7 +16,7 @@ from endpoints.get_single_object.get_single_object import GetSingleObject
     """)
 def test_get_single_object(generate_new_object):
     request = GetSingleObject()
-    request.url_for_get_single_object(generate_new_object["id"])
+    request.check_get_single_object(generate_new_object["id"])
     request.check_response_status_code()
     request.check_headers()
     request.check_response_object_contains_all_params()

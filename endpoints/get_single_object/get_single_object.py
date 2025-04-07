@@ -9,7 +9,7 @@ class GetSingleObject:
         self.total_objects = None
         self.status_code = None
 
-    def url_for_get_single_object(self, object_id):
+    def check_get_single_object(self, object_id):
         with allure.step("Sending GET/objects/{object_id} request"):
             request = requests.get(f"https://api.restful-api.dev/objects/{object_id}")
         self.status_code = request.status_code

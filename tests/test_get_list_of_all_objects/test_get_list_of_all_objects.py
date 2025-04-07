@@ -16,7 +16,7 @@ from endpoints.get_list_of_all_objects.get_list_of_all_objects import GetListOfA
     """)
 def test_get_list_of_all_objects():
     request = GetListOfAllObjects()
-    request.url_for_get_list_of_all_objects()
+    request.check_get_list_of_all_objects()
     request.check_response_status_code()
     request.check_headers()
     request.check_response_total_objects()
