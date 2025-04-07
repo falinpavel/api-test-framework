@@ -22,6 +22,8 @@ def generate_new_object():
         response_generator = requests.post(
             "https://api.restful-api.dev/objects", headers=headers, json=body
         ).json()
+    with allure.step(f"Checking that param 'createdAt' is not null"):
+        assert response_generator["createdAt"] is not None, "Object is not created"
     yield response_generator
     with allure.step(f"Sending DELETE/objects/{response_generator['id']} request"):
         requests.delete(f"https://api.restful-api.dev/objects/{response_generator['id']}")
